@@ -1,0 +1,47 @@
+    {% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Get Started</title>
+    {% comment %} <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/startsearching.css' %}"> {% endcomment %}
+</head>
+
+<body>
+  {% comment %} <div id="particles-js"></div>
+        <script type="text/javascript" src="{% static 'js/particles.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/app.js' %}"></script> {% endcomment %}
+    <h1>Welcome,{{username}}</h1>
+    <form action="/AddBot/" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        Bot Name:<input type="text" name="bot_name">
+        Bot id : <input type="text" name="bot_id"><br>
+        Bot url: <input type="url" name="bot_url"><br>
+                <label for="img">Select image:</label>
+                <input type="file" id="img" name="bot_image" accept="image/*"><br>
+                <input type="submit" value="Add">
+        
+    </form>
+ <a href="/Logout/" class="Abutton">Logout</a>
+
+    <form action="/ShowBot/" method="POST">
+    {%csrf_token%}
+
+    <button type="submit">Get Info</button>
+    </form>
+    <br><br>
+
+    <a href="/userProfile/" method="post">Profile</a>
+
+{{message}}
+<br>
+<br>
+{% for dest in c %}
+    <p>{{dest.bot_name}}</p>
+    <p>{{dest.bot_id}}</p>
+    <p><img src="{{dest.bot_image.url}}" width = 200 alt="BotImage"></p>
+
+{% endfor %}
+</body>
+</html>

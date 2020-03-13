@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Get Started</title>
+    <link href="{% static 'css/logincss2.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <div id="particles-js"></div>
+    <script type="text/javascript" src="{% static 'js/particles.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+
+    <h1 align="center">{{message}}</h1> 
+    <form method="POST" id="form">
+        {% csrf_token %}
+        <div class="form__group_Email">
+            <input type="input" class="form__field" placeholder="Username" name="login_email" id='login_email'onkeydown='validation()' required />
+            <span id="text"></span>
+            <label for="name" class="form__label">Username</label>
+        </div>
+
+        <div class="form__group">
+            <input type="password" class="form__field" placeholder="Password" name="login_password" id='login_password'
+                required />
+            <label for="Password" class="form__label">Password</label>
+            <div id="toggle" onclick="showhide()"></div>
+        </div>
+
+        <div class="form__group">
+            <button type="submit" class="NMbutton" formaction="/Login/">Login</button>
+            <a href="/dup_Forget_pass/" class="Abutton">Forget Password</a>
+            <a href="/Signup_dup/" class="Rbutton">Register</a>
+        </div>
+    </form>
+
+<script type="text/javascript">
+    const password = document.getElementById('login_password');
+    const toggle = document.getElementById('toggle');
+    function showhide() {
+        if (password.type === 'password') {
+            password.setAttribute('type', 'text');
+            toggle.classList.add('hide');
+        }
+        else {
+            password.setAttribute('type', 'password');
+            toggle.classList.remove('hide');
+        }
+    }
+</script>
+<script>
+    function validation() {
+        var form = document.getElementById('form');
+        var email = document.getElementById('login_email').value;
+        var text = document.getElementById('text');
+        var pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+        if (email.match(pattern)) {
+            form.classList.add("valid");
+            form.classList.remove("invalid");
+            text.innerHTML = "Your Email Address is valid";
+            text.style.color = "#00ff00"
+        }
+        else {
+            form.classList.remove("valid");
+            form.classList.add("invalid");
+            text.innerHTML = "Please Enter valid Email Address";
+            text.style.color = "#ff0000"
+        }
+        if (email == "") {
+            form.classList.remove("valid");
+            form.classList.remove("invalid");
+            text.innerHTML = "";
+        }
+    }
+</script>
+</body>
+</html>

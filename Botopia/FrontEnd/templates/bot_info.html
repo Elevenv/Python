@@ -1,0 +1,25 @@
+<html>
+<body>
+<canvas id="c" name="c">
+
+</canvas>
+    <div>
+
+    Name :<input type="text" name="bot_name" id="bot_name" /> <br>
+    Id :<input type="number" name="bot_id" id="bot_id" /><br>
+    <img src="" id="img">
+    <div style="height:0px;overflow:hidden">
+        <input type="file" accept="image/*" id="fileInput" name="fileInput" />
+    </div><br>
+<button type="button" onclick="chooseFile();"> choose file </button>
+
+<script>
+   function chooseFile() {
+    var a = document.getElementById("fileInput")
+    document.getElementById("fileInput").click();
+
+   }
+</script>
+
+</body>
+</html>

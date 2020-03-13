@@ -1,0 +1,25 @@
+from django.urls import path
+from . import views
+urlpatterns = [
+    path('',views.Homepage,name='Homepage'),
+    path('Login/',views.Login),
+    path('',views.Signup_dup),
+    path('Signup/',views.Signup),
+    path('Verify/',views.Verify),
+    path('Signup_dup/',views.Signup_dup),
+    path('Login_dup/',views.Login_dup),
+    path('Startsearch/',views.Startsearch),
+    path('Resend_otp/',views.Resend_otp),
+    path("Forget_pass/",views.Forget_pass),
+    path("dup_Forget_pass/",views.dup_Forget_pass),
+    path("Forget_pass_verify/",views.Forget_pass_verify),
+    path("New_password/",views.New_password),
+    path("Forget_pass_verify_resend/",views.Forget_pass_verify_resend),
+    path("Logout/",views.Logout),
+    path('AddBot/',views.AddBot),
+    path('show_add_bot/',views.showAddBot),
+    path('ShowBot/',views.ShowBot),
+    path('Change_password/',views.Change_password),
+    path('dup_Change_password/',views.dup_Change_password),
+    path('userProfile/',views.userProfile),
+]

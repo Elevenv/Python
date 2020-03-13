@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Create Account</title>
+        <link rel="stylesheet" href="{% static 'css/stylegetStarted.css' %}">
+    </head>
+
+    <body>
+        <div id="particles-js"></div>
+        <script type="text/javascript" src="{% static 'js/particles.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+        {{message}}
+        <form method="POST" class="formdesign" >
+                {% csrf_token %}
+            <div class="form__group">
+                <input type="email" class="form__field" placeholder="Email" name="new_Email" id='new_Email' required />
+                <label for="name" class="form__label">Email</label>
+            </div>
+
+            <div class="form__group">
+                <input type="input" class="form__field" placeholder="Name" name="new_Name" id='new_Name' required />
+                <label for="name" class="form__label">Name</label>
+            </div>
+
+            <div class="form__group">
+                <input type="password" class="form__field" placeholder="Password" name="new_Password" id='new_Password' required />
+                <label for="Password" class="form__label">Password</label>
+            </div>
+            <div class="form__group">
+                <input type="password" class="form__field" placeholder="Confirm Password" name="confirm_Password" id='confirm_Password' required />
+                <label for="Password" class="form__label">Confirm Password</label>
+            </div>
+            
+            <div class="button">
+                <button type="submit" class="NMbutton" formaction="/Signup/">Register</button>
+            </div>
+
+        </form>
+    </body>
+
+</html>

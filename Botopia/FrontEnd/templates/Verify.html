@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Verify</title>
+        <link rel="stylesheet" href="{% static 'css/stylegetStarted.css' %}">
+    </head>
+
+    <body>
+        <div id="particles-js"></div>
+        <script type="text/javascript" src="{% static 'js/particles.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+
+        <form method = "POST">
+            {% csrf_token %}
+            <div class="form__group">
+                <input type="number" class="form__field" placeholder="Enter OTP" name="signup_otp" id='signup_otp' required />
+                <label for="Password" class="form__label">OTP</label>
+            </div>
+
+            <div class="button">
+                <button type="submit" class = "NMbutton" formaction="/Verify/" value="Verify">Verify</button>
+            </div>
+
+            <div>
+                <a class="NMbutton" href="/Resend_otp/">Resend</a>                
+            </div>
+            <!-- <script>
+                function myFunction() {
+                     document.getElementById("myBtn").disabled = true;
+                     setTimeout(function(){
+                       document.getElementById("myBtn").disabled = false;
+                     }, 5000);
+                }
+            </script>
+             -->
+        </form>
+    </body>
+</html>

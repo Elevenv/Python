@@ -1,0 +1,16 @@
+<html>
+<head>
+    <title>User Profile</title>
+</head>
+<body>
+    <p>Name:{{user_data.name}}</p>
+    <p>Email:{{user_data.email}}</p>
+    <p>Added Bots:</p>
+    {%for i in bot_data%}
+        <p>{{i.bot_name}}</p>
+    {% endfor %}
+    <p><a href="/dup_Change_password/" class="Abutton">Change Password</a></p>
+    <br><br>
+     <p>{{message}}</p>
+</body>
+</html>
