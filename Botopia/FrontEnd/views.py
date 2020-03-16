@@ -41,7 +41,9 @@ def Login(request):
             message="Account does not exists."
             return render(request,"Login.html",{'message':message})
     else:
-        return render(request,"Login.html")
+        message = "Please Login to access your account"
+        request.session['userEmail'] = 1
+        return render(request,"Login.html",{'message':message})
 
 def Signup_dup(request):
     return render(request,'Signup.html')
@@ -180,12 +182,12 @@ def Logout(request):
     try:
         global user_session
         request.session['userEmail'] = None
-        global count
-        count = 1
+        # global count
+        # count = 1
     except KeyError:
         pass
     # request.session['userEmail'] = None
-    return render(request,"Homepage.html",{'message':count})
+    return render(request,"Homepage.html")
 
 
 def AddBot(request):
@@ -211,6 +213,7 @@ def AddBot(request):
         return render(request,"addBot.html",{'message':message})
     else:
         message = "Please Login to access Your Account"
+        request.session['userEmail'] = 1
         return render(request,"Login.html")
 
 
@@ -242,16 +245,18 @@ def dup_Change_password(request):
         return render(request,"Change_password.html")
     else:
         message = "Please Login to access Your Account"
+        request.session['userEmail'] = 1
         return render(request,"Login.html",{'message':message})
 
 # @login_required
 def userProfile(request):
-    global count
+    # global count
     global login_email
     if request.session['userEmail']:
         user_data = User_info.objects.get(email = login_email)
         bot_data = Bot_info.objects.filter(author=user_data.id)
-        return render(request,"userProfile.html",{'user_data':user_data,'bot_data':bot_data,'count':count})
+        return render(request,"userProfile.html",{'user_data':user_data,'bot_data':bot_data})
     else:
         message = "Please Login to access Your Account"
+        request.session['userEmail'] = 1
         return render(request,"Login.html",{'message':message})
