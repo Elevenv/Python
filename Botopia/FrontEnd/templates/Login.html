@@ -11,8 +11,7 @@
     <div id="particles-js"></div>
     <script type="text/javascript" src="{% static 'js/particles.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
-
-    <h1 align="center">{{message}}</h1> 
+    <p>{{message}}</p>
     <form method="POST" id="form">
         {% csrf_token %}
         <div class="form__group_Email">
@@ -34,6 +33,7 @@
             <a href="/Signup_dup/" class="Rbutton">Register</a>
         </div>
     </form>
+    
 
 <script type="text/javascript">
     const password = document.getElementById('login_password');

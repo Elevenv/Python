@@ -3,14 +3,24 @@
     <title>User Profile</title>
 </head>
 <body>
+{% if count == 2 %}
     <p>Name:{{user_data.name}}</p>
     <p>Email:{{user_data.email}}</p>
     <p>Added Bots:</p>
-    {%for i in bot_data%}
-        <p>{{i.bot_name}}</p>
+    {% for dest in bot_data %}
+        <p>{{dest.bot_name}}</p>
+        <p>{{dest.bot_id}}</p>
+        {% if dest.bot_image %}
+            <p><img src="{{dest.bot_image.url}}" width = 400 alt="BotImage"></p>
+        {% endif %}
     {% endfor %}
     <p><a href="/dup_Change_password/" class="Abutton">Change Password</a></p>
+    <p><a href="/Logout/" class="Abutton">Logout</a></p>
     <br><br>
-     <p>{{message}}</p>
+
+{% else %}
+    <h1>Please Login to Access this page.</h1>
+    <p><a href="/Login_dup/" class="Abutton">Login</a></p>
+{% endif %}
 </body>
 </html>

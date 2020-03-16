@@ -12,6 +12,8 @@
         <script type="text/javascript" src="{% static 'js/particles.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
 
+        <p>{{message}}</p>
+
         <form method = "POST">
             {% csrf_token %}
             <div class="form__group">

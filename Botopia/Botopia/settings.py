@@ -147,3 +147,5 @@ EMAIL_HOST_USER = 'discordbottravern@gmail.com'
 EMAIL_HOST_PASSWORD = 'discordbottravern@18VK'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
+
+# LOGIN_URL = '/Login_dup/'
