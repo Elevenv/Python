@@ -1,9 +1,28 @@
+{% load static %}
 <html>
 <head>
     <title>User Profile</title>
 </head>
 <body>
+    {% if user_data.profile_pic == "none" %}
+        <p>Profile Photo:</p>
+        <p><img src="{% static 'image/user.jpg' %}" width = 150 height=150 id="output"></p>
+        <form method="POST" enctype="multipart/form-data" action="/profile_pic/">
+            {% csrf_token %}
+            <p><input type="file" name="user_profile_pic" accept="image/*" onchange="loadFile(event)"></p>
+            <button type="submit">Done</button>
+        </form>
 
+        <!-- <p> <img id="output" width="200"/> </p> -->
+    {% else %}
+        <p>Profile Photo:</p>
+        <a href="/profile_pic/"><img src="{{user_data.profile_pic.url}}" id="output" width=140 height=140></a>
+        <form method="POST" enctype="multipart/form-data" action="/profile_pic/">
+            {% csrf_token %}
+            <p><input type="file" name="user_profile_pic" accept="image/*" onchange="loadFile(event)"></p>
+            <button type="submit">Done</button>
+        </form>
+    {% endif %}
     <p>Name:{{user_data.name}}</p>
     <p>Email:{{user_data.email}}</p>
     <p>Added Bots:</p>
@@ -14,9 +33,15 @@
             <p><img src="{{dest.bot_image.url}}" width = 400 alt="BotImage"></p>
         {% endif %}
     {% endfor %}
-    <p><a href="/dup_Change_password/" class="Abutton">Change Password</a></p>
+    <p><a href="/change_password/" class="Abutton">Change Password</a></p>
     <p><a href="/Logout/" class="Abutton">Logout</a></p>
     <br><br>
-
+    <script>
+        var loadFile = function(event) {
+	    var image = document.getElementById('output');
+	    image.src = URL.createObjectURL(event.target.files[0]);
+        };
+    </script>
+    <p>{{message}}</p>
 </body>
 </html>

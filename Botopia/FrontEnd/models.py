@@ -4,7 +4,7 @@ class User_info(models.Model):
     name = models.CharField(max_length=50)
     email = models.CharField(max_length=50)
     password = models.CharField(max_length=50)
-
+    profile_pic = models.FileField(upload_to='media/')
 
 class Bot_info(models.Model):
     bot_name = models.CharField(max_length=50)

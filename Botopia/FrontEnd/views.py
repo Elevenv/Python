@@ -12,14 +12,18 @@ from django.contrib.auth.models import auth
 from django.contrib.auth.decorators import login_required
 
 def Homepage(request):
-    # global count 
-    # count = 0
-    request.session['userEmail'] = 1
+
     return render(request,'Homepage.html')
 
+def tutorial(request):
+
+    request.session['userEmail'] = 1
+    global login_email 
+    login_email = "none"
+    return render(request,"tutorial.html")
+
 def Login(request):
-    # global count
-    if request.method == 'POST' and request.session['userEmail'] != None:
+    if request.method == 'POST' and request.session['userEmail'] !=11:
         global login_email
         login_email = request.POST['login_email']
         login_password = request.POST['login_password']
@@ -29,11 +33,8 @@ def Login(request):
             if db_object[0].email == login_email and db_object[0].password == login_password:
                 u_info = User_info()
                 username = db_object[0].name
-                # message = "Logged in Succesfully."
                 request.session['userEmail'] = login_email
-                # count = 2
                 return render(request,"addBot.html",{'username':username})
-                # return redirect('/AddBot/')
             else:
                 message="Incorrect Creditionals"
                 return render(request,"Login.html",{'message':message})            
@@ -42,8 +43,9 @@ def Login(request):
             return render(request,"Login.html",{'message':message})
     else:
         message = "Please Login to access your account"
-        request.session['userEmail'] = 1
-        return render(request,"Login.html",{'message':message})
+        # request.session['userEmail'] = 1
+        # return render(request,"tutorial.html",{'message':message})
+        return redirect("/tutorial/",{'message':message})
 
 def Signup_dup(request):
     return render(request,'Signup.html')
@@ -166,7 +168,7 @@ def New_password(request):
             change_pass.password = new_pass
             change_pass.save()
             message ="Password changed succesfully."
-            return render(request,"Login.html",{'message':message})
+            return render(request,"tutorial.html",{'message':message})
         else:
             message = "Password not matches with confirm password."
             return render(request,"New_password.html",{'message':message})
@@ -180,10 +182,10 @@ def Forget_pass_verify_resend(request):
 
 def Logout(request):
     try:
-        global user_session
-        request.session['userEmail'] = None
-        # global count
-        # count = 1
+        global login_email
+        login_email = "none"
+        request.session['userEmail'] = 11
+
     except KeyError:
         pass
     # request.session['userEmail'] = None
@@ -191,10 +193,8 @@ def Logout(request):
 
 
 def AddBot(request):
-    if request.method == 'POST' and request.session['userEmail']:
-        global login_email
-        global count
-
+    global login_email
+    if request.method == 'POST' and request.session['userEmail'] != 11:        
         user_db = User_info.objects.get(email = request.session['userEmail'])
         # user_db = User_info.objects.filter(email = login_email)
         bot_db = Bot_info()
@@ -213,13 +213,14 @@ def AddBot(request):
         return render(request,"addBot.html",{'message':message})
     else:
         message = "Please Login to access Your Account"
-        request.session['userEmail'] = 1
-        return render(request,"Login.html")
+        # request.session['userEmail'] = 1
+        # return render(request,"tutorial.html",{'message':message})
+        return redirect("/tutorial/",{'message':message})
 
 
 def Change_password(request):
-    
-    if request.session['userEmail'] != None:
+    global login_email
+    if request.session['userEmail'] == login_email:
         new_pass = request.POST['new_pass']
         confirm_new_pass = request.POST['confrim_new_pass']
         if len(new_pass)>=8 and len(confirm_new_pass)>=8:
@@ -238,25 +239,43 @@ def Change_password(request):
             return render(request,"Change_password.html",{'message':message})
     else:
         message = "Please Login to access Your Account"
-        return render(request,"Login.html",{'message':message})
+        # return render(request,"tutorial.html",{'message':message})
+        return redirect("/tutorial/")
 
 def dup_Change_password(request):
-    if request.session['userEmail'] !=None:
+    global login_email
+    if request.session['userEmail'] == login_email:
         return render(request,"Change_password.html")
     else:
         message = "Please Login to access Your Account"
-        request.session['userEmail'] = 1
-        return render(request,"Login.html",{'message':message})
+        # request.session['userEmail'] = 1        
+        # return render(request,"tutorial.html",{'message':message})
+        return redirect("/tutorial/")
 
 # @login_required
 def userProfile(request):
     # global count
     global login_email
-    if request.session['userEmail']:
+    if request.session['userEmail'] == login_email: 
         user_data = User_info.objects.get(email = login_email)
         bot_data = Bot_info.objects.filter(author=user_data.id)
         return render(request,"userProfile.html",{'user_data':user_data,'bot_data':bot_data})
     else:
         message = "Please Login to access Your Account"
-        request.session['userEmail'] = 1
-        return render(request,"Login.html",{'message':message})
+        # request.session['userEmail'] = 1
+        # return render(request,"tutorial.html",{'message':message})
+        return redirect("/tutorial/")
+
+def profile_pic(request):
+    if request.FILES['user_profile_pic']:
+        # user_profile_pic = request.POST['user_profile_pic']
+        change_pic = User_info.objects.get(email = request.session['userEmail'])
+        myfile = request.FILES['user_profile_pic']
+        fs = FileSystemStorage()
+        change_pic.profile_pic = fs.save(myfile.name, myfile)
+        change_pic.save()
+        message = "profile changed succesfully"
+        return redirect("/userProfile/")
+    else:
+        return redirect("/userProfile/")
+
