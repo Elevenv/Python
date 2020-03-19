@@ -3,7 +3,7 @@
     <title>Add Bots</title>
 </head>
 <body>
-
+    <!-- {% if a %} -->
     <h1>Welcome,{{username}}</h1>
     <p>{{message}}</p>
     <form action="/AddBot/" method="POST" enctype="multipart/form-data">
@@ -19,7 +19,9 @@
 
     <p><a href="/Logout/" class="Abutton">Logout</a></p>
     <p><a href="/userProfile/" method="post">Profile</a></p>
-
+    <!-- {% else %}
+    <p>hey</p>
+    {% endif %} -->
     <script>
         var loadFile = function(event) {
 	    var image = document.getElementById('output');

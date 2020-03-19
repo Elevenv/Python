@@ -10,7 +10,7 @@
         <form method="POST" enctype="multipart/form-data" action="/profile_pic/">
             {% csrf_token %}
             <p><input type="file" name="user_profile_pic" accept="image/*" onchange="loadFile(event)"></p>
-            <button type="submit">Done</button>
+            <button type="submit" id="done" disabled >Done</button>
         </form>
 
         <!-- <p> <img id="output" width="200"/> </p> -->
@@ -20,7 +20,7 @@
         <form method="POST" enctype="multipart/form-data" action="/profile_pic/">
             {% csrf_token %}
             <p><input type="file" name="user_profile_pic" accept="image/*" onchange="loadFile(event)"></p>
-            <button type="submit">Done</button>
+            <button type="submit" id="done" disabled>Done</button>
         </form>
     {% endif %}
     <p>Name:{{user_data.name}}</p>
@@ -30,7 +30,7 @@
         <p>{{dest.bot_name}}</p>
         <p>{{dest.bot_id}}</p>
         {% if dest.bot_image %}
-            <p><img src="{{dest.bot_image.url}}" width = 400 alt="BotImage"></p>
+            <p><img src="{{dest.bot_image.url}}" width = 200 height=200 alt="BotImage"></p>
         {% endif %}
     {% endfor %}
     <p><a href="/change_password/" class="Abutton">Change Password</a></p>
@@ -39,7 +39,9 @@
     <script>
         var loadFile = function(event) {
 	    var image = document.getElementById('output');
-	    image.src = URL.createObjectURL(event.target.files[0]);
+        image.src = URL.createObjectURL(event.target.files[0]);
+        var done = document.getElementById('done');
+        done.disabled = false;
         };
     </script>
     <p>{{message}}</p>

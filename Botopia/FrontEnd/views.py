@@ -12,7 +12,8 @@ from django.contrib.auth.models import auth
 from django.contrib.auth.decorators import login_required
 
 def Homepage(request):
-
+    global login_email 
+    login_email = "none"
     return render(request,'Homepage.html')
 
 def tutorial(request):
@@ -34,7 +35,7 @@ def Login(request):
                 u_info = User_info()
                 username = db_object[0].name
                 request.session['userEmail'] = login_email
-                return render(request,"addBot.html",{'username':username})
+                return render(request,"addBot.html",{'username':username,'a':request.session['userEmail']})
             else:
                 message="Incorrect Creditionals"
                 return render(request,"Login.html",{'message':message})            
@@ -81,26 +82,28 @@ def Signup(request):
     return render(request,"Signup.html",{'message':message})
 
 def Verify(request):
-    user_otp = request.POST['signup_otp']
-    global server_otp
-    global user_name
-    global user_email
-    global user_pass
-    
-    u_info = User_info()
-    user_otp_into_int = int(user_otp)
-    if user_otp_into_int == server_otp:
-        message = "Account Created Succesfully.Please Login."
-        u_info.name = user_name
-        u_info.email = user_email
-        u_info.password = user_pass
-        u_info.save()
-        request.session['userEmail'] = user_email
-        return render(request,"Login.html",{'message':message})
+    if request.method =='POST':
+        user_otp = request.POST['signup_otp']
+        global server_otp
+        global user_name
+        global user_email
+        global user_pass
+        
+        u_info = User_info()
+        user_otp_into_int = int(user_otp)
+        if user_otp_into_int == server_otp:
+            message = "Account Created Succesfully.Please Login."
+            u_info.name = user_name
+            u_info.email = user_email
+            u_info.password = user_pass
+            u_info.save()
+            request.session['userEmail'] = user_email
+            return render(request,"Login.html",{'message':message})
+        else:
+            message = "Incorrect One Time Password.Please Register Again."
+            return render(request,"Verify.html",{'message':message})
     else:
-        message = "Incorrect One Time Password.Please Register Again."
-        return render(request,"Verify.html",{'message':message})
-
+        return redirect("/signup/")
 def Startsearch(request):
     bot_db = Bot_info.objects.all()
     return render(request,"Startsearch.html",{'bot_db':bot_db})
@@ -108,7 +111,7 @@ def Startsearch(request):
 def Resend_otp(request):
     global user_email
     global_send_otp(user_email)
-    message="OTP send succesfully."
+    message="OTP sent succesfully."
     return render(request,"Verify.html",{'message':message})
 
 def dup_Forget_pass(request):
@@ -178,23 +181,23 @@ def New_password(request):
 def Forget_pass_verify_resend(request):
     global for_user_email
     global_send_otp(for_user_email)
-    return render(request,"Forget_pass_verify.html")
+    message = "OTP sent succesfully"
+    return render(request,"Forget_pass_verify.html",{'message':message})
 
 def Logout(request):
     try:
         global login_email
         login_email = "none"
-        request.session['userEmail'] = 11
+        request.session['userEmail'] = None
 
     except KeyError:
         pass
-    # request.session['userEmail'] = None
     return render(request,"Homepage.html")
 
 
 def AddBot(request):
     global login_email
-    if request.method == 'POST' and request.session['userEmail'] != 11:        
+    if request.session['userEmail'] != None:        
         user_db = User_info.objects.get(email = request.session['userEmail'])
         # user_db = User_info.objects.filter(email = login_email)
         bot_db = Bot_info()

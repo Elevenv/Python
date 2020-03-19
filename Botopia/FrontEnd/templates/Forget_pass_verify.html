@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="{% static 'css/stylegetStarted.css' %}">
     </head>
 
-    <body>
+    <body onload="wait()">
         <p> {{message}} </p>
         <div id="particles-js"></div>
         <script type="text/javascript" src="{% static 'js/particles.js' %}"></script>
@@ -23,13 +23,33 @@
             <div class="button">
                 <button type="submit" class = "NMbutton" formaction="/Forget_pass_verify/" value="Verify">Verify</button>
             </div>
+        </form>
 
-            <div class="button">
-                <a href="/Forget_pass_verify_resend/" class="NMbutton">Resend</a>
+        <form action="/Forget_pass_verify_resend/" method="POST">
+            {% csrf_token %}
+            Did not get OTP: <div id ="timer"></div>
+            <div>
+                <button id="link" disabled> Resend </button>                 
             </div>
-            <!-- <div>
-                <a href="/Resend_otp/" class="NMbutton">Resend</a>
-            </div> -->
         </form>
     </body>
+    <script>
+        i = 60;
+        var link = document.getElementById('link');
+        function wait() {
+        if(i==0){
+            document.getElementById('timer').innerHTML = ""
+        }
+        else{
+            document.getElementById('timer').innerHTML = i;
+        }
+            i--;
+            if (i < 0) {
+                link.disabled = false
+            }
+            else {
+            setTimeout(wait, 1000);
+            }        
+        }
+        </script>
 </html>

@@ -81,9 +81,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'OPTIONS': 
         {
-            # ...
             'timeout': 20,
-            # ...
         }
     }
 }
@@ -144,7 +142,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'discordbottravern@gmail.com'
-EMAIL_HOST_PASSWORD = 'discordbottravern@18VK'
+EMAIL_HOST_PASSWORD = 'Botopia18VK011'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
