@@ -100,7 +100,7 @@ def Verify(request):
             request.session['userEmail'] = user_email
             return render(request,"Login.html",{'message':message})
         else:
-            message = "Incorrect One Time Password.Please Register Again."
+            message = "Incorrect One Time Password."
             return render(request,"Verify.html",{'message':message})
     else:
         return redirect("/signup/")
