@@ -106,7 +106,8 @@ def Verify(request):
         return redirect("/signup/")
 def Startsearch(request):
     bot_db = Bot_info.objects.all()
-    return render(request,"Startsearch.html",{'bot_db':bot_db})
+    bot_dev = User_info.objects.all()
+    return render(request,"Startsearch.html",{'bot_db':bot_db,'bot_dev':bot_dev})
 
 def Resend_otp(request):
     global user_email
@@ -204,6 +205,7 @@ def AddBot(request):
         bot_db.author = user_db
         bot_db.bot_name = request.POST['bot_name']
         bot_db.bot_id = request.POST['bot_id']
+        bot_db.bot_desc = request.POST['bot_desc']
         # bot_db.bot_image = request.POST['bot_image']
         bot_db.bot_url = request.POST['bot_url']
 
@@ -256,18 +258,23 @@ def dup_Change_password(request):
         return redirect("/tutorial/")
 
 # @login_required
-def userProfile(request):
-    # global count
+def userProfile(request , message=None):
+
     global login_email
-    if request.session['userEmail'] == login_email: 
-        user_data = User_info.objects.get(email = login_email)
-        bot_data = Bot_info.objects.filter(author=user_data.id)
-        return render(request,"userProfile.html",{'user_data':user_data,'bot_data':bot_data})
+    if request.session['userEmail'] == login_email:
+        if message==None: 
+            user_data = User_info.objects.get(email = login_email)
+            bot_data = Bot_info.objects.filter(author=user_data.id)
+            return render(request,"userProfile.html",{'user_data':user_data,'bot_data':bot_data})
+        else:
+            user_data = User_info.objects.get(email = login_email)
+            bot_data = Bot_info.objects.filter(author=user_data.id)
+            return render(request,"userProfile.html",{'user_data':user_data,'bot_data':bot_data,'message':message})
     else:
         message = "Please Login to access Your Account"
         # request.session['userEmail'] = 1
         # return render(request,"tutorial.html",{'message':message})
-        return redirect("/tutorial/")
+        return redirect('tutorial',message)
 
 def profile_pic(request):
     if request.FILES['user_profile_pic']:
@@ -282,3 +289,14 @@ def profile_pic(request):
     else:
         return redirect("/userProfile/")
 
+def Remove_bot(request):
+    global login_email
+    if request.session['userEmail'] == login_email: 
+        rm_bot_id = request.POST['rm_bot_id']
+        rm_bot = Bot_info.objects.filter(bot_id=rm_bot_id)
+        if rm_bot:
+            rm_bot.delete()
+            message = ""
+        else:
+            message = "Please enter valid Bot id."
+    return redirect("/userProfile/",message)

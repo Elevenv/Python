@@ -3,30 +3,34 @@
     <title>Add Bots</title>
 </head>
 <body>
-    <!-- {% if a %} -->
+
     <h1>Welcome,{{username}}</h1>
     <p>{{message}}</p>
     <form action="/AddBot/" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <p>Bot Name:<input type="text" name="bot_name"></p>
-        <p>Bot id : <input type="text" name="bot_id"></p>
-        <p>Bot url: <input type="url" name="bot_url"></p>
+        <p>Bot Name:<input type="text" name="bot_name" required></p>
+        <p>Bot id : <input type="number" name="bot_id" required></p>
+        <p>Bot url: <input type="url" name="bot_url" required></p>
+        <p>Bot description : <textarea name="bot_desc" rows="3" cols="50"> </textarea> </p>
         <p><label for="img">Select image:</label></p>       
-        <p><input type="file" id="img" name="bot_image" accept="image/*" onchange="loadFile(event)"></p>        
+        <p><input type="file" id="img" name="bot_image" accept="image/*" onchange="loadFile(event)" required></p>        
         <p> <img id="output" width="200"/> </p>      
-        <p><input type="submit" value="Add"></p>       
+        <p><input type="submit" value="Add"></p>   
+        <p><input type="reset" onclick="reset()" value="Reset"></p>    
     </form>
 
     <p><a href="/Logout/" class="Abutton">Logout</a></p>
     <p><a href="/userProfile/" method="post">Profile</a></p>
-    <!-- {% else %}
-    <p>hey</p>
-    {% endif %} -->
+
     <script>
         var loadFile = function(event) {
 	    var image = document.getElementById('output');
 	    image.src = URL.createObjectURL(event.target.files[0]);
         };
+
+        function reset(){
+            var a = document.getElementById('output').src = "";
+        }
     </script>
 
 </body>

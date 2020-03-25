@@ -25,17 +25,15 @@
                     <span></span>
                     <span></span>
                     <div class="contain">
-                        <h2>Bot Name</h2>
-                        <p>
-                            {{dest.bot_name}}
-                        </p>
+                        <p>Bot Name : {{dest.bot_name}} </p>
                         <div class="tags">
-                            <h4>Bot ID:</h4>
-                            <p>{{dest.bot_id}}</p>
+                            <p><button><a href="{{dest.bot_url}}" class="NMbutton">Invite</a></button></p>
                         </div>
                         <div class="tags">
-                            <h3>Bot URL</h3>
-                            <p><button><a href="{{dest.bot_url}}" class="NMbutton">Invite</a></button></p>
+                            <p> Bot Developer : {{dest.author.name}} </p>
+                        </div>
+                        <div class="tags">
+                            Bot Description : <p>{{dest.bot_desc}} </p>
                         </div>
                     </div>
                 </div>

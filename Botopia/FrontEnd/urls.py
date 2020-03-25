@@ -26,4 +26,5 @@ urlpatterns = [
     path('change_password/',views.dup_Change_password),
     path('userProfile/',views.userProfile),
     path('profile_pic/',views.profile_pic),
+    path('Remove_bot/',views.Remove_bot),
 ]

@@ -33,6 +33,14 @@
             <p><img src="{{dest.bot_image.url}}" width = 200 height=200 alt="BotImage"></p>
         {% endif %}
     {% endfor %}
+    {%if bot_data %}
+        Want to remove bot?,<br>
+        <form action="/Remove_bot/" method="POST">
+            {% csrf_token %}
+            <input type="number" name="rm_bot_id" placeholder="Enter Bot id ">
+            <button type="submit"> Remove Bot </button>
+        </form>
+        {% endif %}
     <p><a href="/change_password/" class="Abutton">Change Password</a></p>
     <p><a href="/Logout/" class="Abutton">Logout</a></p>
     <br><br>

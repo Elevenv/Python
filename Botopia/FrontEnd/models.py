@@ -12,3 +12,4 @@ class Bot_info(models.Model):
     bot_image = models.FileField(upload_to = 'media/')
     bot_url = models.URLField(max_length=100)
     author = models.ForeignKey(User_info,on_delete=models.CASCADE)
+    bot_desc = models.CharField(max_length=300)
