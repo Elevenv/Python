@@ -40,6 +40,12 @@
     </svg>
 
     <div class="container">
+        {% if login_email != "none" %}
+            <div class="rows">welcome {{username}}</div>
+            <a class="tag-detail" href="/Logout/">Logout</a><br>
+            <a  class="tag-detail " href="/userProfile/">Profile</a>
+            <a class="tag-detail" href="/dup_addBot/">AddBot</a>
+        {% else %}
         <div class="rows">
             <div class="tag">For Bot-developer</div>
             <div class="tag-detail">
@@ -54,6 +60,7 @@
                 <a href="/tutorial/"> Start Creating</a>
             </div>
         </div>
+        {% endif %}
         <div class="rows">
             <div class="tag">For server-admins</div>
             <div class="tag-detail">

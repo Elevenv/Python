@@ -9,12 +9,18 @@ from .models import Bot_info
 from django.core.mail import send_mail
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.models import auth
-from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.decorators import login_required
 
 def Homepage(request):
     global login_email 
     login_email = "none"
-    return render(request,'Homepage.html')
+    global username
+    username = ""
+    return render(request,'Homepage.html',{'login_email':login_email,'username':username})
+
+def Home(request):
+    global login_email
+    return render(request,"Homepage.html",{'login_email':login_email,'username':username})
 
 def tutorial(request):
 
@@ -26,6 +32,7 @@ def tutorial(request):
 def Login(request):
     if request.method == 'POST' and request.session['userEmail'] !=11:
         global login_email
+        global username
         login_email = request.POST['login_email']
         login_password = request.POST['login_password']
 
@@ -35,7 +42,7 @@ def Login(request):
                 u_info = User_info()
                 username = db_object[0].name
                 request.session['userEmail'] = login_email
-                return render(request,"addBot.html",{'username':username,'a':request.session['userEmail']})
+                return render(request,"addBot.html",{'username':username})
             else:
                 message="Incorrect Creditionals"
                 return render(request,"Login.html",{'message':message})            
@@ -105,9 +112,10 @@ def Verify(request):
     else:
         return redirect("/signup/")
 def Startsearch(request):
+    global username
     bot_db = Bot_info.objects.all()
     bot_dev = User_info.objects.all()
-    return render(request,"Startsearch.html",{'bot_db':bot_db,'bot_dev':bot_dev})
+    return render(request,"Startsearch.html",{'bot_db':bot_db,'bot_dev':bot_dev,'username':username})
 
 def Resend_otp(request):
     global user_email
@@ -186,14 +194,11 @@ def Forget_pass_verify_resend(request):
     return render(request,"Forget_pass_verify.html",{'message':message})
 
 def Logout(request):
-    try:
-        global login_email
-        login_email = "none"
-        request.session['userEmail'] = None
-
-    except KeyError:
-        pass
-    return render(request,"Homepage.html")
+  
+    global login_email
+    login_email = "none"
+    request.session['userEmail'] = None
+    return render(request,"Homepage.html",{'login_email':login_email})
 
 
 def AddBot(request):
@@ -258,23 +263,18 @@ def dup_Change_password(request):
         return redirect("/tutorial/")
 
 # @login_required
-def userProfile(request , message=None):
+def userProfile(request):
 
     global login_email
     if request.session['userEmail'] == login_email:
-        if message==None: 
-            user_data = User_info.objects.get(email = login_email)
-            bot_data = Bot_info.objects.filter(author=user_data.id)
-            return render(request,"userProfile.html",{'user_data':user_data,'bot_data':bot_data})
-        else:
-            user_data = User_info.objects.get(email = login_email)
-            bot_data = Bot_info.objects.filter(author=user_data.id)
-            return render(request,"userProfile.html",{'user_data':user_data,'bot_data':bot_data,'message':message})
+        user_data = User_info.objects.get(email = login_email)
+        bot_data = Bot_info.objects.filter(author=user_data.id)
+        return render(request,"userProfile.html",{'user_data':user_data,'bot_data':bot_data})
     else:
         message = "Please Login to access Your Account"
         # request.session['userEmail'] = 1
         # return render(request,"tutorial.html",{'message':message})
-        return redirect('tutorial',message)
+        return redirect('/tutorial/')
 
 def profile_pic(request):
     if request.FILES['user_profile_pic']:
@@ -291,6 +291,7 @@ def profile_pic(request):
 
 def Remove_bot(request):
     global login_email
+    global message
     if request.session['userEmail'] == login_email: 
         rm_bot_id = request.POST['rm_bot_id']
         rm_bot = Bot_info.objects.filter(bot_id=rm_bot_id)
@@ -299,4 +300,7 @@ def Remove_bot(request):
             message = ""
         else:
             message = "Please enter valid Bot id."
-    return redirect("/userProfile/",message)
+    return redirect("/userProfile/")
+
+def dup_addBot(request):
+    return render(request,"addBot.html")

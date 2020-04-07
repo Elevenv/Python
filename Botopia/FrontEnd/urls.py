@@ -4,6 +4,7 @@ urlpatterns = [
     path('',views.Homepage),
     path('Login/',views.Login),
     path('Homepage/',views.Homepage),
+    path('Home/',views.Home),
     path('tutorial/',views.tutorial),
     # path('log/',views.log),
     # path('Sign_dup/',views.Signup_dup),
@@ -26,5 +27,6 @@ urlpatterns = [
     path('change_password/',views.dup_Change_password),
     path('userProfile/',views.userProfile),
     path('profile_pic/',views.profile_pic),
-    path('Remove_bot/',views.Remove_bot),
+    path('Remove_bot/',views.Remove_bot),   
+    path('dup_addBot/',views.dup_addBot),
 ]

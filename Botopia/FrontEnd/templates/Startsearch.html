@@ -10,8 +10,14 @@
     </head>
     
     <body>
+        <br>
+        {% if login_email != "none" %}
+            welcome {{username}} <br>
+            <p><a href="/Logout/">Logout</a></p>
+    
+        {% endif %}
         <div>
-            <button><a href="/Homepage/">Home</a></button>
+            <button><a href="/Home/">Home</a></button>
         </div>
     {% for dest in bot_db %}    
         <div class="container">
@@ -40,5 +46,7 @@
             </div>
         </div>
     {% endfor %}
+
+   
     </body>
     </html>

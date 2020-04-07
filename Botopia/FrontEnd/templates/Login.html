@@ -15,7 +15,7 @@
     <form method="POST" id="form">
         {% csrf_token %}
         <div class="form__group_Email">
-            <input type="input" class="form__field" placeholder="Username" name="login_email" id='login_email'onkeydown='validation()' required />
+            <input type="email" class="form__field" placeholder="Username" name="login_email" id='login_email'onkeydown='validation()' required />
             <span id="text"></span>
             <label for="name" class="form__label">Username</label>
         </div>
