@@ -1,0 +1,219 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Botopia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/Aboutus2.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"><!-- for social icon -->
+</head>
+
+<body>
+    <section class="banner" id="sec">
+        <header>
+            <p>BOTOPIA</p>
+            {% if login_email != "none" %}
+            <div class="user">
+                    <button class="userbtn">{{username}}</button>
+                    <div class="dropdown-content">
+                        <a href="/userProfile/">Profile</a>
+                        <a href="/dup_addBot/">Add Bot</a>
+                        <a href="/Logout/">Logout</a>
+                    </div>
+            </div>
+            {% endif %}
+            <div id="toggle" onclick="toggle()"></div>
+        </header>
+        <!-- <div class="abtus">About Us</div> -->
+        <div class="info1">
+            <img src="{% static 'image/dhruvesh.jpg' %}" alt="palace">
+            <div class="abtinfo">
+                <p class="name">dhruvesh Gangapuram</p>
+                <div class="skills">
+                    <h1>Skills</h1>
+                    <li>
+                        <h3>HTML5</h3>
+                        <span class="bar">
+                            <span class="html"></span>
+                        </span>
+                    </li>
+                    <li>
+                        <h3>CSS3</h3>
+                        <span class="bar">
+                            <span class="css"></span>
+                        </span>
+                    </li>
+                    <li>
+                        <h3>JAVA</h3>
+                        <span class="bar">
+                            <span class="java"></span>
+                        </span>
+                    </li>
+                    <li>
+                        <h3>JAVASCRIPT</h3>
+                        <span class="bar">
+                            <span class="js"></span>
+                        </span>
+                    </li>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="info2">
+            <img src="{% static 'image/img2.jpg' %}" alt="palace">
+            <div class="abtinfo">
+                <p class="name">Affan Ansasi</p>
+                <div class="skills">
+                    <h1>Skills</h1>
+                    <li>
+                        <h3>HTML5</h3>
+                        <span class="bar">
+                            <span class="html"></span>
+                        </span>
+                    </li>
+                    <li>
+                        <h3>CSS3</h3>
+                        <span class="bar">
+                            <span class="css"></span>
+                        </span>
+                    </li>
+                    <li>
+                        <h3>JAVA</h3>
+                        <span class="bar">
+                            <span class="java"></span>
+                        </span>
+                    </li>
+                    <li>
+                        <h3>JAVASCRIPT</h3>
+                        <span class="bar">
+                            <span class="js"></span>
+                        </span>
+                    </li>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="info3">
+            <img src="{% static 'image/img3.jpg' %}" alt="palace">
+            <div class="abtinfo">
+                <p class="name">Vitthal Jadhav</p>
+                <div class="skills">
+                    <h1>Skills</h1>
+                    <li>
+                        <h3>HTML5</h3>
+                        <span class="bar">
+                            <span class="html"></span>
+                        </span>
+                    </li>
+                    <li>
+                        <h3>CSS3</h3>
+                        <span class="bar">
+                            <span class="css"></span>
+                        </span>
+                    </li>
+                    <li>
+                        <h3>JAVA</h3>
+                        <span class="bar">
+                            <span class="java"></span>
+                        </span>
+                    </li>
+                    <li>
+                        <h3>JAVASCRIPT</h3>
+                        <span class="bar">
+                            <span class="js"></span>
+                        </span>
+                    </li>
+                </div>
+            </div>
+        </div>
+        <div class="info1">
+            <img src="{% static 'image/img1.jpg' %}" alt="palace">
+            <div class="abtinfo">
+                <p class="name">Sushant Choudhari</p>
+                <div class="skills">
+                    <h1>Skills</h1>
+                    <li>
+                        <h3>HTML5</h3>
+                        <span class="bar">
+                            <span class="html"></span>
+                        </span>
+                    </li>
+                    <li>
+                        <h3>CSS3</h3>
+                        <span class="bar">
+                            <span class="css"></span>
+                        </span>
+                    </li>
+                    <li>
+                        <h3>JAVA</h3>
+                        <span class="bar">
+                            <span class="java"></span>
+                        </span>
+                    </li>
+                    <li>
+                        <h3>JAVASCRIPT</h3>
+                        <span class="bar">
+                            <span class="js"></span>
+                        </span>
+                    </li>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+    <div id="navigation" class="navigation"> 
+        <ul>
+            <li><a href="/Home/" data-text="Home">Home</a></li>
+            <li><a href="/contact/" data-text="Contact">Contact</a></li>
+            <li><a href="/startsearch/" data-text="Home">Search Bot</a></li>
+
+        </ul>
+        <div class="social_icon">
+
+            <a class="btn" href="#">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a class="btn" href="#">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a class="btn" href="#">
+                <i class="fab fa-google"></i>
+            </a>
+            <a class="btn" href="#">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a class="btn" href="#">
+                <i class="fab fa-youtube"></i>
+            </a>
+        </div>
+    </div>
+
+
+
+    <script src="{% static 'js/scroll-out.js' %}"></script>
+    <script type="text/javascript">
+        ScrollOut({
+            targets: '.info1,.html,.css,.java,.js'
+        })
+        ScrollOut({
+            targets: '.info2'
+        })
+        ScrollOut({
+            targets: '.info3'
+        })
+    </script>
+    <script>
+        function toggle() {
+            var sec = document.getElementById("sec");
+            var nav = document.getElementById("navigation");
+            sec.classList.toggle('active');
+            nav.classList.toggle('active');
+        }
+    </script>
+</body>
+
+</html>

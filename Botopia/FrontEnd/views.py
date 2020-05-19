@@ -9,7 +9,6 @@ from .models import Bot_info
 from django.core.mail import send_mail
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.models import auth
-# from django.contrib.auth.decorators import login_required
 
 def Homepage(request):
     global login_email 
@@ -79,7 +78,8 @@ def Signup(request):
         elif len(user_pass) >= 8 :
             if user_pass == user_pass_confirm:
                 global_send_otp(user_email)
-                return render(request,"Verify.html")
+                message = "OTP Sent succesfully."
+                return render(request,"Verify.html",{'message':message})
             else:
                 message = "Password and Confirm Password does not matches."
         else:
@@ -113,9 +113,10 @@ def Verify(request):
         return redirect("/signup/")
 def Startsearch(request):
     global username
+    global login_email
     bot_db = Bot_info.objects.all()
     bot_dev = User_info.objects.all()
-    return render(request,"Startsearch.html",{'bot_db':bot_db,'bot_dev':bot_dev,'username':username})
+    return render(request,"Startsearch.html",{'bot_db':bot_db,'bot_dev':bot_dev,'username':username,'login_email':login_email})
 
 def Resend_otp(request):
     global user_email
@@ -180,7 +181,7 @@ def New_password(request):
             change_pass.password = new_pass
             change_pass.save()
             message ="Password changed succesfully."
-            return render(request,"tutorial.html",{'message':message})
+            return render(request,"Login.html",{'message':message})
         else:
             message = "Password not matches with confirm password."
             return render(request,"New_password.html",{'message':message})
@@ -203,6 +204,7 @@ def Logout(request):
 
 def AddBot(request):
     global login_email
+    global username
     if request.session['userEmail'] != None:        
         user_db = User_info.objects.get(email = request.session['userEmail'])
         # user_db = User_info.objects.filter(email = login_email)
@@ -220,16 +222,18 @@ def AddBot(request):
             bot_db.bot_image = fs.save(myfile.name, myfile)
         bot_db.save()
         message = "Bot added succesfully."
-        return render(request,"addBot.html",{'message':message})
+        return redirect("/userProfile/")
+        # return render(request,"addBot.html",{'message':message})
     else:
         message = "Please Login to access Your Account"
         # request.session['userEmail'] = 1
         # return render(request,"tutorial.html",{'message':message})
-        return redirect("/tutorial/",{'message':message})
+        return redirect("/tutorial/",{'message':message,'username':username})
 
 
 def Change_password(request):
     global login_email
+    global username
     if request.session['userEmail'] == login_email:
         new_pass = request.POST['new_pass']
         confirm_new_pass = request.POST['confrim_new_pass']
@@ -245,7 +249,7 @@ def Change_password(request):
                 message = "Password not matches with confirm password."
                 return render(request,"Change_password.html",{'message':message})
         else:
-            message = "Password length should > 8"
+            message = "Password length should greater than 8"
             return render(request,"Change_password.html",{'message':message})
     else:
         message = "Please Login to access Your Account"
@@ -254,8 +258,9 @@ def Change_password(request):
 
 def dup_Change_password(request):
     global login_email
+    global username
     if request.session['userEmail'] == login_email:
-        return render(request,"Change_password.html")
+        return render(request,"Change_password.html",{'username':username})
     else:
         message = "Please Login to access Your Account"
         # request.session['userEmail'] = 1        
@@ -266,10 +271,11 @@ def dup_Change_password(request):
 def userProfile(request):
 
     global login_email
+    global username
     if request.session['userEmail'] == login_email:
         user_data = User_info.objects.get(email = login_email)
         bot_data = Bot_info.objects.filter(author=user_data.id)
-        return render(request,"userProfile.html",{'user_data':user_data,'bot_data':bot_data})
+        return render(request,"userProfile.html",{'user_data':user_data,'bot_data':bot_data,'username':username})
     else:
         message = "Please Login to access Your Account"
         # request.session['userEmail'] = 1
@@ -303,4 +309,20 @@ def Remove_bot(request):
     return redirect("/userProfile/")
 
 def dup_addBot(request):
-    return render(request,"addBot.html")
+    global login_email
+    global username
+    if request.session['userEmail'] == login_email:
+        return render(request,"addBot.html",{'username':username})
+    else:
+        message = "Please login to accesss your account."
+        return redirect('/tutorial/')
+
+def about(request):
+    global login_email
+    global username
+    return render(request,"Aboutus.html",{'login_email':login_email,'username':username})
+
+def contact(request):
+    global login_email
+    global username
+    return render(request,"contact.html",{'login_email':login_email,'username':username})

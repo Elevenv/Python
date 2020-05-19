@@ -1,13 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
 <html>
+
 <head>
-    <title>Add Bot Tutorial</title>
+    <title>Botopia</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"><!-- for social icon -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="{% static 'css/tutorial3.css' %}" rel="stylesheet">
 </head>
-<body>
-    <br>
-    <br>
-    <p align="center">Make sure you have logged in.</p>
-    <p align="center"><button><a href="/login/">Login</a></button></p>
-    <p align="center"><button><a href="/signup/">signup</a></button></p>
-    <p>{{message}}</p>
+
+<body>     
+    <section class="banner" id="sec">
+
+        <header>
+            <p>BOTOPIA</p>
+            <div id="toggle" onclick="toggle()"></div>
+        </header>
+        <div class="welcom">Welcome</div>
+        <div class="desp">Lets begin the beautiful journey of Botopia<br>where you will find amazing bots which are
+            ready to work for you.</div>
+        <a href="/login/" class="login">
+            <span class="front">Log in</span>
+            <span class="center"></span>
+            <span class="back">Click</span>
+        </a>
+        <a href="/signup/" class="signup">
+            <span class="front">Sign up</span>
+            <span class="center"></span>
+            <span class="back">Click</span>
+        </a>
+    </section>
+    <div id="navigation" >
+        <ul>
+            <li><a href="/Home/" data-text="Home">Home</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="/contact/">Contact</a></li>
+            <li><a href="/startsearch/" data-text="Home">Search Bot</a></li>    
+        </ul>
+        <div class="social_icon">
+
+            <a class="btn" href="#">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a class="btn" href="#">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a class="btn" href="#">
+                <i class="fab fa-google"></i>
+            </a>
+            <a class="btn" href="#">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a class="btn" href="#">
+                <i class="fab fa-youtube"></i>
+            </a>
+        </div>
+    </div>
+    <script>
+        function toggle() {
+            var sec = document.getElementById("sec");
+            var nav = document.getElementById("navigation");
+            sec.classList.toggle('active');
+            nav.classList.toggle('active');
+        }
+    </script>
 </body>
+
 </html>

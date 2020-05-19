@@ -29,4 +29,6 @@ urlpatterns = [
     path('profile_pic/',views.profile_pic),
     path('Remove_bot/',views.Remove_bot),   
     path('dup_addBot/',views.dup_addBot),
+    path('about/',views.about),
+    path('contact/',views.contact),
 ]
