@@ -1,0 +1,46 @@
+y=int(input("Enter year:"))
+if(y%4==0):
+    print("Year is leap ")
+else:
+    print("Not leap year")
+a=int(input("enter No"))
+print(abs(a))
+
+
+a=2
+b=1
+c=3
+if(a>b and a>c):
+    print("a is greater")
+elif(b>c and b>a):
+    print("b is greater")
+else:
+    print("c is greater")
+
+n=5
+if(n>0):
+    print("Number is positive")
+elif(n<0):
+    print("Number is negative")
+else:
+    print(" no is zero")
+
+s=21
+if(s%2==0):
+    print("Even ")
+else:
+    print("odd")
+
+s1=70
+s2=56
+s3=76
+s4=98
+s5=45
+avg=((s1+s2+s3+s4+s5)/500)*100
+print(avg)
+if(avg<=100 and avg>=75):
+    print("dist")
+elif(avg<75 and avg>=60):
+    print("first class")
+else:
+    print("fail")

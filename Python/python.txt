@@ -1,0 +1,424 @@
+List methods :
+
+Python List append()
+Add a single element to the end of the list
+
+Python List clear()
+Removes all Items from the List
+
+Python List copy()
+returns a shallow copy of the list
+
+Python List count()
+returns count of the element in the list
+
+Python List extend()
+adds iterable elements to the end of the list
+
+Python List index()
+returns the index of the element in the list
+
+Python List insert()
+insert an element to the list
+
+Python List pop()
+Removes element at the given index
+
+Python List remove()
+Removes item from the list
+
+Python List reverse()
+reverses the list
+
+Python List sort()
+sorts elements of a list
+
+
+Tuple Methods :
+
+count()
+index()
+
+
+# Program to get a substring from the given string 
+
+py_string = 'Python'
+
+# stop = 3
+# contains 0, 1 and 2 indices
+slice_object = slice(3) 
+print(py_string[slice_object])  # Pyt
+
+# start = 1, stop = 6, step = 2
+# contains 1, 3 and 5 indices
+slice_object = slice(1, 6, 2)
+print(py_string[slice_object])   # yhn
+
+
+Python Exception Handling Using try, except and finally statement
+In this tutorial, you'll learn how to handle exceptions in your Python program using try, except and finally statements with the help of examples.
+Exceptions in Python
+Python has many built-in exceptions that are raised when your program encounters an error (something in the program goes wrong).
+
+When these exceptions occur, the Python interpreter stops the current process and passes it to the calling process until it is handled. If not handled, the program will crash.
+
+For example, let us consider a program where we have a function A that calls function B, which in turn calls function C. If an exception occurs in function C but is not handled in C, the exception passes to B and then to A.
+
+If never handled, an error message is displayed and our program comes to a sudden unexpected halt.
+
+Catching Exceptions in Python
+In Python, exceptions can be handled using a try statement.
+
+The critical operation which can raise an exception is placed inside the try clause. The code that handles the exceptions is written in the except clause.
+
+We can thus choose what operations to perform once we have caught the exception. Here is a simple example.
+
+# import module sys to get the type of exception
+import sys
+
+randomList = ['a', 0, 2]
+
+for entry in randomList:
+    try:
+        print("The entry is", entry)
+        r = 1/int(entry)
+        break
+    except:
+        print("Oops!", sys.exc_info()[0], "occurred.")
+        print("Next entry.")
+        print()
+print("The reciprocal of", entry, "is", r)
+Output
+
+The entry is a
+Oops! <class 'ValueError'> occurred.
+Next entry.
+
+The entry is 0
+Oops! <class 'ZeroDivisionError'> occured.
+Next entry.
+
+The entry is 2
+The reciprocal of 2 is 0.5
+In this program, we loop through the values of the randomList list. As previously mentioned, the portion that can cause an exception is placed inside the try block.
+
+If no exception occurs, the except block is skipped and normal flow continues(for last value). But if any exception occurs, it is caught by the except block (first and second values).
+
+Here, we print the name of the exception using the exc_info() function inside sys module. We can see that a causes ValueError and 0 causes ZeroDivisionError.
+
+Since every exception in Python inherits from the base Exception class, we can also perform the above task in the following way:
+
+# import module sys to get the type of exception
+import sys
+
+randomList = ['a', 0, 2]
+
+for entry in randomList:
+    try:
+        print("The entry is", entry)
+        r = 1/int(entry)
+        break
+    except Exception as e:
+        print("Oops!", e.__class__, "occurred.")
+        print("Next entry.")
+        print()
+print("The reciprocal of", entry, "is", r)
+This program has the same output as the above program.
+
+Catching Specific Exceptions in Python
+In the above example, we did not mention any specific exception in the except clause.
+
+This is not a good programming practice as it will catch all exceptions and handle every case in the same way. We can specify which exceptions an except clause should catch.
+
+A try clause can have any number of except clauses to handle different exceptions, however, only one will be executed in case an exception occurs.
+
+We can use a tuple of values to specify multiple exceptions in an except clause. Here is an example pseudo code.
+
+try:
+   # do something
+   pass
+
+except ValueError:
+   # handle ValueError exception
+   pass
+
+except (TypeError, ZeroDivisionError):
+   # handle multiple exceptions
+   # TypeError and ZeroDivisionError
+   pass
+
+except:
+   # handle all other exceptions
+   pass
+Raising Exceptions in Python
+In Python programming, exceptions are raised when errors occur at runtime. We can also manually raise exceptions using the raise keyword.
+
+We can optionally pass values to the exception to clarify why that exception was raised.
+
+>>> raise KeyboardInterrupt
+Traceback (most recent call last):
+...
+KeyboardInterrupt
+
+>>> raise MemoryError("This is an argument")
+Traceback (most recent call last):
+...
+MemoryError: This is an argument
+
+>>> try:
+...     a = int(input("Enter a positive integer: "))
+...     if a <= 0:
+...         raise ValueError("That is not a positive number!")
+... except ValueError as ve:
+...     print(ve)
+...    
+Enter a positive integer: -2
+That is not a positive number!
+Python try with else clause
+In some situations, you might want to run a certain block of code if the code block inside try ran without any errors. For these cases, you can use the optional else keyword with the try statement.
+
+Note: Exceptions in the else clause are not handled by the preceding except clauses.
+
+Let's look at an example:
+
+# program to print the reciprocal of even numbers
+
+try:
+    num = int(input("Enter a number: "))
+    assert num % 2 == 0
+except:
+    print("Not an even number!")
+else:
+    reciprocal = 1/num
+    print(reciprocal)
+Output
+
+If we pass an odd number:
+
+Enter a number: 1
+Not an even number!
+If we pass an even number, the reciprocal is computed and displayed.
+
+Enter a number: 4
+0.25
+However, if we pass 0, we get ZeroDivisionError as the code block inside else is not handled by preceding except.
+
+Enter a number: 0
+Traceback (most recent call last):
+  File "<string>", line 7, in <module>
+    reciprocal = 1/num
+ZeroDivisionError: division by zero
+Python try...finally
+The try statement in Python can have an optional finally clause. This clause is executed no matter what, and is generally used to release external resources.
+
+For example, we may be connected to a remote data center through the network or working with a file or a Graphical User Interface (GUI).
+
+In all these circumstances, we must clean up the resource before the program comes to a halt whether it successfully ran or not. These actions (closing a file, GUI or disconnecting from network) are performed in the finally clause to guarantee the execution.
+
+Here is an example of file operations to illustrate this.
+
+try:
+   f = open("test.txt",encoding = 'utf-8')
+   # perform file operations
+finally:
+   f.close()
+This type of construct makes sure that the file is closed even if an exception occurs during the program execution.
+
+
+Example: User-Defined Exception in Python
+In this example, we will illustrate how user-defined exceptions can be used in a program to raise and catch errors.
+
+This program will ask the user to enter a number until they guess a stored number correctly. To help them figure it out, a hint is provided whether their guess is greater than or less than the stored number.
+
+# define Python user-defined exceptions
+class Error(Exception):
+    """Base class for other exceptions"""
+    pass
+
+
+class ValueTooSmallError(Error):
+    """Raised when the input value is too small"""
+    pass
+
+
+class ValueTooLargeError(Error):
+    """Raised when the input value is too large"""
+    pass
+
+
+# you need to guess this number
+number = 10
+
+# user guesses a number until he/she gets it right
+while True:
+    try:
+        i_num = int(input("Enter a number: "))
+        if i_num < number:
+            raise ValueTooSmallError
+        elif i_num > number:
+            raise ValueTooLargeError
+        break
+    except ValueTooSmallError:
+        print("This value is too small, try again!")
+        print()
+    except ValueTooLargeError:
+        print("This value is too large, try again!")
+        print()
+
+print("Congratulations! You guessed it correctly.")
+Here is a sample run of this program.
+
+Enter a number: 12
+This value is too large, try again!
+
+Enter a number: 0
+This value is too small, try again!
+
+Enter a number: 8
+This value is too small, try again!
+
+Enter a number: 10
+Congratulations! You guessed it correctly.
+We have defined a base class called Error.
+
+The other two exceptions (ValueTooSmallError and ValueTooLargeError) that are actually raised by our program are derived from this class. This is the standard way to define user-defined exceptions in Python programming, but you are not limited to this way only.
+
+Customizing Exception Classes
+We can further customize this class to accept other arguments as per our needs.
+
+To learn about customizing the Exception classes, you need to have the basic knowledge of Object-Oriented programming.
+
+Visit Python Object Oriented Programming to start learning about Object-Oriented programming in Python.
+
+Let's look at one example:
+
+class SalaryNotInRangeError(Exception):
+    """Exception raised for errors in the input salary.
+
+    Attributes:
+        salary -- input salary which caused the error
+        message -- explanation of the error
+    """
+
+    def __init__(self, salary, message="Salary is not in (5000, 15000) range"):
+        self.salary = salary
+        self.message = message
+        super().__init__(self.message)
+
+
+salary = int(input("Enter salary amount: "))
+if not 5000 < salary < 15000:
+    raise SalaryNotInRangeError(salary)
+Output
+
+Enter salary amount: 2000
+Traceback (most recent call last):
+  File "<string>", line 17, in <module>
+    raise SalaryNotInRangeError(salary)
+__main__.SalaryNotInRangeError: Salary is not in (5000, 15000) range
+Here, we have overridden the constructor of the Exception class to accept our own custom arguments salary and message. Then, the constructor of the parent Exception class is called manually with the self.message argument using super().
+
+The custom self.salary attribute is defined to be used later.
+
+The inherited __str__ method of the Exception class is then used to display the corresponding message when SalaryNotInRangeError is raised.
+
+We can also customize the __str__ method itself by overriding it.
+
+class SalaryNotInRangeError(Exception):
+    """Exception raised for errors in the input salary.
+
+    Attributes:
+        salary -- input salary which caused the error
+        message -- explanation of the error
+    """
+
+    def __init__(self, salary, message="Salary is not in (5000, 15000) range"):
+        self.salary = salary
+        self.message = message
+        super().__init__(self.message)
+
+    def __str__(self):
+        return f'{self.salary} -> {self.message}'
+
+
+salary = int(input("Enter salary amount: "))
+if not 5000 < salary < 15000:
+    raise SalaryNotInRangeError(salary)
+Output
+
+Enter salary amount: 2000
+Traceback (most recent call last):
+  File "/home/bsoyuj/Desktop/Untitled-1.py", line 20, in <module>
+    raise SalaryNotInRangeError(salary)
+__main__.SalaryNotInRangeError: 2000 -> Salary is not in (5000, 15000) range
+
+Set Methods :
+
+s.add(ele)
+s.update(ele)
+s.remove/discard(ele)
+s.pop()
+s.clear()
+
+Set Operations :
+
+Union : |
+All but not repeted
+A = {1, 2, 3, 4, 5}
+B = {4, 5, 6, 7, 8}
+
+output:
+{1, 2, 3, 4, 5, 6, 7, 8}
+    
+Intersection : &
+Intersection of A and B is a set of elements that are common in both the sets.
+
+A = {1, 2, 3, 4, 5}
+B = {4, 5, 6, 7, 8}
+Output:
+{4, 5}
+
+Difference: -
+
+A = {1, 2, 3, 4, 5}
+B = {4, 5, 6, 7, 8}
+
+Output:
+{1,2,3}
+
+symmetric Difference: ^
+
+A = {1, 2, 3, 4, 5}
+B = {4, 5, 6, 7, 8}
+
+Output:
+{1,2,3,6,7,8}
+
+Namespaces and Scoping
+Variables are names (identifiers) that map to objects. A namespace is a dictionary of variable names (keys) and their corresponding objects (values).
+
+A Python statement can access variables in a local namespace and in the global namespace. If a local and a global variable have the same name, the local variable shadows the global variable.
+
+Each function has its own local namespace. Class methods follow the same scoping rule as ordinary functions.
+
+Python makes educated guesses on whether variables are local or global. It assumes that any variable assigned a value in a function is local.
+
+Therefore, in order to assign a value to a global variable within a function, you must first use the global statement.
+
+The statement global VarName tells Python that VarName is a global variable. Python stops searching the local namespace for the variable.
+
+For example, we define a variable Money in the global namespace. Within the function Money, we assign Money a value, therefore Python assumes Money as a local variable. 
+However, we accessed the value of the local variable Money before setting it, so an UnboundLocalError is the result. Uncommenting the global statement fixes the problem.
+
+
+
+According to Python docs, the following are the built-In Class Attributes
+
+Every Python class keeps following built-in attributes and they can be accessed using dot (.) operator like any other attribute:
+
+classname• __dict__ : Dictionary containing the class's namespace.
+classname• __doc__ : Class documentation string or None if undefined.
+classname• __name__: Class name.
+classname• __module__: Module name in which the class is defined.
+– This attribute is "__main__" in interactive mode.
+
