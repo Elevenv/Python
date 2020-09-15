@@ -387,8 +387,8 @@ h3{
 .Rbutton{
     position: relative;
     /* float: right; */
-    top: 100px;
-    left: -200px;
+    top: 50px;
+    left: 10px;
     /* margin-top: 5%;
     margin-right: 4%; */
     /* margin-left: 3%;  */
@@ -405,6 +405,32 @@ h3{
     font-size: 1.5rem;
 }
 .Rbutton:hover{
+    background: #fff;
+    border: transparent;
+    /* border-radius: 10px; */
+    color: #000;
+}
+.R1button{
+    position: relative;
+    /* float: right; */
+    top: 130px;
+    left: -200px;
+    /* margin-top: 5%;
+    margin-right: 4%; */
+    /* margin-left: 3%;  */
+    padding-left: 4%;
+    padding-right: 5%;
+    height: 50px;
+    width: 150px;
+    border: 2px solid #fff;
+    font-family: 'Poppins', sans-serif; 
+    background: transparent;
+    border: 2px solid #fff;
+    box-shadow: 5px 5px rgb(160, 160, 160);
+    color: #fff;
+    font-size: 1.5rem;
+}
+.R1button:hover{
     background: #fff;
     border: transparent;
     /* border-radius: 10px; */

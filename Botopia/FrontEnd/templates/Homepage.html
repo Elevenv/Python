@@ -12,7 +12,7 @@
 <body>
     <section class="banner" id="sec">
         <header>
-            {% if login_email != "none" %}
+            {% if login_email != "none" and login_email != 1 %}
             <svg id="logoname" width="543" height="158" viewBox="0 0 543 158" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -118,13 +118,6 @@
 
     <div id="navigation">
         <ul>
-            <!-- {% if login_email != "none" %}
-                <li>Hey {{username}}</li>
-                <li><a href="/dup_addBot/" data-text="Add Bot">Add Bot</a></li>
-                <li><a href="/userProfile/" data-text="User Profile">User Profile </a></li>
-                <li><a href="/Logout/" data-text="Logout">Logout</a></li>
-            {% endif %} -->
-
             <li><a href="/about/">About</a></li>
             <li><a href="/contact/">Contact</a></li>
         </ul>

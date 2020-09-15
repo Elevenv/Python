@@ -203,7 +203,6 @@ def Logout(request):
 
 
 def AddBot(request):
-    global login_email
     global username
     if request.session['userEmail'] != None:        
         user_db = User_info.objects.get(email = request.session['userEmail'])
@@ -278,8 +277,6 @@ def userProfile(request):
         return render(request,"userProfile.html",{'user_data':user_data,'bot_data':bot_data,'username':username})
     else:
         message = "Please Login to access Your Account"
-        # request.session['userEmail'] = 1
-        # return render(request,"tutorial.html",{'message':message})
         return redirect('/tutorial/')
 
 def profile_pic(request):
@@ -318,11 +315,12 @@ def dup_addBot(request):
         return redirect('/tutorial/')
 
 def about(request):
-    global login_email
+    # global login_email
     global username
-    return render(request,"Aboutus.html",{'login_email':login_email,'username':username})
+    return render(request,"Aboutus.html",{'login_email':request.session['userEmail'],'username':username})
 
 def contact(request):
-    global login_email
+    # global login_email
+    request.session['userEmail']
     global username
-    return render(request,"contact.html",{'login_email':login_email,'username':username})
+    return render(request,"contact.html",{'login_email':request.session['userEmail'],'username':username})

@@ -13,7 +13,7 @@
     <section class="banner" id="sec">
         <header>
             <p>BOTOPIA</p>
-            {% if login_email != "none" %}
+            {% if login_email != "none" and login_email != 1 %}
             <div class="user">
                     <button class="userbtn">{{username}}</button>
                     <div class="dropdown-content">
@@ -29,7 +29,7 @@
         <div class="info1">
             <img src="{% static 'image/dhruvesh.jpg' %}" alt="palace">
             <div class="abtinfo">
-                <p class="name">dhruvesh Gangapuram</p>
+                <p class="name">Dhruvesh Gangapuram</p>
                 <div class="skills">
                     <h1>Skills</h1>
                     <li>
@@ -64,7 +64,7 @@
         <div class="info2">
             <img src="{% static 'image/img2.jpg' %}" alt="palace">
             <div class="abtinfo">
-                <p class="name">Affan Ansasi</p>
+                <p class="name">Affan Ansari</p>
                 <div class="skills">
                     <h1>Skills</h1>
                     <li>

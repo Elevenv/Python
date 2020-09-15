@@ -14,7 +14,7 @@
     <section class="banner" id="sec">
         <header>
             <p>BOTOPIA</p>
-            {% if login_email != "none" %}
+            {% if login_email != "none" and login_email != 1 %}
             <div class="user">
                 <button class="userbtn">{{username}}</button>
                 <div class="dropdown-content">

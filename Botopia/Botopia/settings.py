@@ -25,7 +25,7 @@ SECRET_KEY = '79k35+-93k4vwm7j=5-7v&ri1o+rq=hzbo1d)nw7&7qkm+(6-q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.202','localhost','127.0.0.1']
 
 
 # Application definition
@@ -142,7 +142,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587 
 EMAIL_HOST_USER = 'discordbottravern@gmail.com'
-EMAIL_HOST_PASSWORD = 'Botopia18VK011'
+EMAIL_HOST_PASSWORD = 'Botopia@18VK011'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 

@@ -12,7 +12,7 @@
 <body>
     <section class="banner" id="sec">
         <header>
-            {% if login_email != "none" %}
+            {% if login_email != "none" and login_email != 1 %}
             <p>BOTOPIA</p>
             <div class="user">
                 <button class="userbtn">{{username}}</button>
@@ -57,7 +57,7 @@
             <li><a href="/Home/" data-text="Home">Home</a></li>
             <li><a href="/about/" data-text="About">About</a></li>
             <li><a href="/contact/" data-text="Contact">Contact</a></li>
-            {% if login_email != "none" %}
+            {% if login_email != "none" and login_email != 1 %}
             <!-- <li><a href="/userProfile/" data-text="Profile">Profile</a></li> -->
             <li><a href="/dup_addBot/" data-text="Add Bot">Add Bot</a></li>
             <!-- <li><a href="/Logout/" data-text="Logout">Logout</a></li> -->

@@ -349,9 +349,12 @@ header #toggle:after{
 }
 
 .NMbutton{
+    position: relative;
     margin-top: 5%;
     margin-right: 4%;
     /* margin-left: 3%;  */
+    /* padding-left: 4%;
+    padding-right: 5%; */
     padding-left: 4%;
     padding-right: 5%;
     height: 50px;
